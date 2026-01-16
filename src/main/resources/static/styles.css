@@ -1,0 +1,57 @@
+:root { font-family: Arial, sans-serif; }
+.container { max-width: 1000px; margin: 20px auto; padding: 0 12px; }
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.card { border: 1px solid #ddd; border-radius: 8px; padding: 12px; }
+.card h3 { margin: 0 0 8px; }
+.btn { padding: 8px 10px; border: 1px solid #333; background: #fff; cursor: pointer; border-radius: 6px; }
+.btn.primary { background: #111; color: #fff; }
+.btn.danger { border-color: #a00; color: #a00; }
+input, select { padding: 8px; border: 1px solid #ccc; border-radius: 6px; }
+.small { color: #666; font-size: 12px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.poster { width: 100%; height: 320px; object-fit: cover; border-radius: 6px; background: #f3f3f3; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+hr { border: none; border-top: 1px solid #eee; margin: 16px 0; }
+.code { background: #f7f7f7; padding: 10px; border-radius: 6px; white-space: pre-wrap; }
+a { color: #111; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.toast {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #111;
+    color: #fff;
+    font-size: 14px;
+    max-width: 360px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .18s ease, transform .18s ease;
+    z-index: 9999;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast.ok { background: #1b5e20; }
+.toast.err { background: #7f1d1d; }
+.modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.35);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9998;
+}
+.modal-backdrop.show { display: flex; }
+
+.modal {
+    background: #fff;
+    width: min(520px, 94vw);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 14px 40px rgba(0,0,0,0.25);
+}
+.modal h3 { margin: 0 0 8px 0; }
+.modal .list { max-height: 300px; overflow: auto; border:1px solid #eee; border-radius:10px; padding: 10px; }
+.modal .list label { display: flex; gap: 10px; padding: 6px 4px; align-items: center; }
+.modal .actions { display:flex; justify-content:flex-end; gap:10px; margin-top:12px; }

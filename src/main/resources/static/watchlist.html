@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Tracker - Watchlist</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body data-page="watchlist">
+<div class="container">
+    <div class="toolbar">
+        <div>
+            <h1 id="watchlistHeader">Watchlist</h1>
+            <div class="small" id="watchlistDesc"></div>
+        </div>
+        <div class="row">
+            <button class="btn" id="btnBack">Назад</button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Добавить фильм в этот список</h3>
+        <form id="watchlistSearchForm" class="row">
+            <input id="q" placeholder="Название" required>
+            <input id="year" placeholder="год (опционально)" style="width:160px;">
+            <button class="btn primary" type="submit">Поиск</button>
+        </form>
+        <div id="searchResults" class="grid" style="margin-top:12px;"></div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <div class="toolbar">
+            <h3>Фильмы в списке</h3>
+            <div class="row">
+                <label>Sort:
+                    <select id="sortSelect">
+                        <option value="position">position</option>
+                        <option value="title">title</option>
+                        <option value="year">year</option>
+                        <option value="addedAt">addedAt</option>
+                    </select>
+                </label>
+                <select id="sortDir">
+                    <option value="desc">↑</option>
+                    <option value="asc">↓</option>
+                </select>
+                <button class="btn primary" id="btnSaveOrder">Сохранить порядок</button>
+            </div>
+        </div>
+
+        <div id="items" class="grid" style="margin-top:12px;"></div>
+    </div>
+
+    <p id="err" class="small" style="color:#a00;"></p>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

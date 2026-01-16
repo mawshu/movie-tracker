@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Tracker - Movies</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body data-page="movies">
+<div class="container">
+    <h1>Поиск фильмов</h1>
+
+    <div class="card">
+        <h3>TMDb поиск</h3>
+        <form id="moviesSearchForm" class="row">
+            <input id="q" placeholder="Название фильма" required>
+            <input id="year" placeholder="год (опционально)" style="width:160px;">
+            <button class="btn primary" type="submit">Поиск</button>
+        </form>
+
+        <div id="searchResults" class="grid" style="margin-top:12px;"></div>
+
+        <div style="margin-top:12px;">
+            <button class="btn" type="button" id="btnMore" style="display:none;">Показать ещё</button>
+        </div>
+    </div>
+
+    <p id="err" class="small" style="color:#a00;"></p>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Tracker - Library</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body data-page="library">
+<div class="container">
+    <h1 id="libraryTitle">Library</h1>
+
+    <div class="card">
+        <div class="toolbar">
+            <h3>Сортировка</h3>
+            <div class="row">
+                <select id="libSortBy">
+                    <option value="addedAt">addedAt</option>
+                    <option value="title">title</option>
+                    <option value="year">year</option>
+                    <option value="rating">rating</option>
+                </select>
+                <select id="libSortDir">
+                    <option value="desc">↑</option>
+                    <option value="asc">↓</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <h3>Просмотренные фильмы</h3>
+        <div id="watchedList" class="grid" style="margin-top:12px;"></div>
+    </div>
+
+    <hr>
+
+    <div class="card">
+        <h3>Смотреть позже</h3>
+        <div id="plannedList" class="grid" style="margin-top:12px;"></div>
+    </div>
+
+    <p id="err" class="small" style="color:#a00;"></p>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
