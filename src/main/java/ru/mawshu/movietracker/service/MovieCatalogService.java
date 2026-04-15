@@ -1,5 +1,6 @@
 package ru.mawshu.movietracker.service;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mawshu.movietracker.domain.Movie;
@@ -41,6 +42,10 @@ public class MovieCatalogService {
         return movieRepository.findById(id);
     }
 
+    @Cacheable(
+            value = "movieSearch",
+            key = "#query + '|' + (#year == null ? 'null' : #year) + '|' + #page + '|' + #size"
+    )
     public List<MovieSearchItem> searchMovies(String query, Integer year, int page, int size) {
         Map response = externalMovieApiClient.searchMovies(query, year, page);
 

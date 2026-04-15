@@ -15,4 +15,13 @@ spring:
   flyway:
     enabled: true
 
+tmdb:
+  base-url: https://api.themoviedb.org/3
+  connect-timeout-ms: 3000
+  read-timeout-ms: 5000
 
+app:
+  cache:
+    movie-search:
+      ttl-minutes: 10
+      max-size: 500

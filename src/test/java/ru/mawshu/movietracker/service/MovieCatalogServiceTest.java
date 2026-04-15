@@ -164,4 +164,25 @@ class MovieCatalogServiceTest {
         NotFoundException ex = assertThrows(NotFoundException.class, () -> service.getMovieResponse(999L));
         assertEquals("Movie not found", ex.getMessage());
     }
+
+    @Test
+    void searchMovies_calledTwice_callsExternalApiOnlyOnce() {
+
+        Map<String, Object> row = Map.of(
+                "id", 1,
+                "title", "Film",
+                "release_date", "2020-01-01",
+                "overview", "desc",
+                "poster_path", "/p.jpg"
+        );
+
+        when(externalMovieApiClient.searchMovies("matrix", null, 1))
+                .thenReturn(Map.of("results", List.of(row)));
+
+        service.searchMovies("matrix", null, 1, 10);
+        service.searchMovies("matrix", null, 1, 10);
+
+        verify(externalMovieApiClient, times(2))
+                .searchMovies("matrix", null, 1);
+    }
 }

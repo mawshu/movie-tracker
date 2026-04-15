@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import ru.mawshu.movietracker.repository.UserRepository;
 import ru.mawshu.movietracker.service.UserLibraryService;
+import ru.mawshu.movietracker.service.UserService;
 import ru.mawshu.movietracker.service.WatchlistService;
 import ru.mawshu.movietracker.service.MovieCatalogService;
 
@@ -16,6 +17,12 @@ public class TestMocksConfig {
     @Primary
     public UserRepository userRepository() {
         return Mockito.mock(UserRepository.class);
+    }
+
+    @Bean
+    @Primary
+    public UserService userService() {
+        return Mockito.mock(UserService.class);
     }
 
     @Bean

@@ -9,9 +9,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.mawshu.movietracker.TestMocksConfig;
+import ru.mawshu.movietracker.service.UserService;
 import ru.mawshu.movietracker.domain.User;
 import ru.mawshu.movietracker.dto.CreateUserRequest;
 import ru.mawshu.movietracker.repository.UserRepository;
+import ru.mawshu.movietracker.exception.ConflictException;
 
 import java.time.LocalDateTime;
 
@@ -27,7 +29,7 @@ class UserControllerTest {
     @Autowired MockMvc mockMvc;
     @Autowired ObjectMapper objectMapper;
 
-    @Autowired UserRepository userRepository; // Mockito mock из TestMocksConfig
+    @Autowired UserService userService; // Mockito mock из TestMocksConfig
 
     @Test
     void createUser_success_returns200() throws Exception {
@@ -36,9 +38,6 @@ class UserControllerTest {
         req.setUsername("testuser");
         req.setPassword("pass");
 
-        when(userRepository.existsByEmail("test@mail.ru")).thenReturn(false);
-        when(userRepository.existsByUsername("testuser")).thenReturn(false);
-
         User saved = new User();
         ReflectionTestUtils.setField(saved, "id", 1L);
         saved.setEmail("test@mail.ru");
@@ -46,7 +45,7 @@ class UserControllerTest {
         saved.setPassword("pass");
         saved.setCreatedAt(LocalDateTime.now());
 
-        when(userRepository.save(any(User.class))).thenReturn(saved);
+        when(userService.createUser(any())).thenReturn(saved);
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -78,7 +77,8 @@ class UserControllerTest {
         req.setUsername("testuser");
         req.setPassword("pass");
 
-        when(userRepository.existsByEmail("test@mail.ru")).thenReturn(true);
+        when(userService.createUser(any()))
+                .thenThrow(new ConflictException("Email already exists"));
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)

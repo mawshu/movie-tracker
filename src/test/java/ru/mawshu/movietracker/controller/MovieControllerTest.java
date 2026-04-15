@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import ru.mawshu.movietracker.TestMocksConfig;
 import ru.mawshu.movietracker.dto.MovieResponse;
 import ru.mawshu.movietracker.exception.NotFoundException;
+import ru.mawshu.movietracker.exception.ExternalServiceException;
 import ru.mawshu.movietracker.service.MovieCatalogService;
 
 import static org.mockito.Mockito.when;
@@ -48,5 +49,17 @@ class MovieControllerTest {
                         .param("page", "1")
                         .param("size", "5"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void searchMovies_externalServiceError_returns503() throws Exception {
+        when(movieCatalogService.searchMovies("test", null, 1, 5))
+                .thenThrow(new ExternalServiceException("TMDb unavailable", new RuntimeException()));
+
+        mockMvc.perform(get("/api/movies/search")
+                        .param("query", "test")
+                        .param("page", "1")
+                        .param("size", "5"))
+                .andExpect(status().isServiceUnavailable());
     }
 }
